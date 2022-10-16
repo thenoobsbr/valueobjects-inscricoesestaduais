@@ -1,3 +1,4 @@
 variables:
+  - group: valueobjects-inscricoesestaduais
   - group: sonar
   - group: nuget
