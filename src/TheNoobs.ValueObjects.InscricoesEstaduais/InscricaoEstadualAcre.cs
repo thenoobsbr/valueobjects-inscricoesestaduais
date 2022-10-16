@@ -26,30 +26,33 @@ public class InscricaoEstadualAcre : InscricaoEstadual
         Requirement.To().Match(
             inscricao,
             @"^[0-9]*$",
-            () => new ArgumentException($"Inscrição estadual ('{inscricaoEstadual}') inválida para a uf '{Uf.Sigla}'.",
-                nameof(inscricaoEstadual)));
+            () => new ArgumentException(
+                $"Inscrição estadual ('{inscricaoEstadual}') inválida para a uf '{Uf.Sigla}'.",
+                paramName: nameof(inscricaoEstadual)));
 
         Requirement.To().BeTrue(
             inscricao.Length == TAMANHO_INSCRICAO_ESTADUAL,
             () => new ArgumentException(
                 $"Inscrição estadual ('{inscricaoEstadual}') inválida para a uf '{Uf.Sigla}'. A inscrição estadual deve ser {TAMANHO_INSCRICAO_ESTADUAL} dígitos.",
-                nameof(inscricaoEstadual)));
+                paramName: nameof(inscricaoEstadual)));
 
         Requirement.To().BeTrue(
             InscricaoEstadualIniciadaCom01(inscricao),
-            () => new ArgumentException("A inscrição estadual do Acre precisa ser inciada com '01'.",
-                nameof(inscricaoEstadual)));
+            () => new ArgumentException(
+                "A inscrição estadual do Acre precisa ser inciada com '01'.",
+                paramName: nameof(inscricaoEstadual)));
 
         Requirement.To().BeTrue(
             InscricaoEstadualComPosicao3E4Valida(inscricao),
-            () => new ArgumentException("A inscrição estadual do Acre precisa ser possuir '00' na posição 3 e 4.",
-                nameof(inscricaoEstadual)));
+            () => new ArgumentException(
+                "A inscrição estadual do Acre precisa ser possuir '00' na posição 3 e 4.",
+                paramName: nameof(inscricaoEstadual)));
 
         Requirement.To().BeTrue(
             DigitoVerificadorEstaValido(inscricao),
             () => new ArgumentException(
                 $"Inscrição estadual ('{inscricaoEstadual}') inválida para a uf '{Uf.Sigla}'.",
-                nameof(inscricaoEstadual)));
+                paramName: nameof(inscricaoEstadual)));
     }
 
     private static string CalcularDigitoVerificador(string inscricaoEstadualBase)

@@ -9,7 +9,7 @@ namespace TheNoobs.ValueObjects.InscricoesEstaduais.Abstractions;
 
 public abstract class InscricaoEstadual : ValueObject
 {
-    protected internal InscricaoEstadual(UnidadeFederativa uf, string inscricaoEstadual)
+    private protected InscricaoEstadual(UnidadeFederativa uf, string inscricaoEstadual)
     {
         Uf = uf;
         Value = inscricaoEstadual.ToUpperSeIsento();
@@ -49,7 +49,8 @@ public abstract class InscricaoEstadual : ValueObject
     {
         Requirement.To().NotBeNull(uf, () => new ArgumentNullException(nameof(uf)));
         Requirement.To().NotBeEmpty(inscricaoEstadual,
-            () => new ArgumentNullException(nameof(inscricaoEstadual),
+            () => new ArgumentNullException(
+                paramName: nameof(inscricaoEstadual),
                 "A inscrição estadual não pode ser nula ou vazia."));
 
         if (EhIsenta(inscricaoEstadual))
@@ -60,8 +61,9 @@ public abstract class InscricaoEstadual : ValueObject
         Requirement.To().NotMatch(
             inscricaoEstadual,
             @"[^\dpP\/\-\.]",
-            () => new ArgumentException($"Inscrição estadual ('{inscricaoEstadual}') inválida para a uf '{uf.Sigla}'.",
-                nameof(inscricaoEstadual)));
+            () => new ArgumentException(
+                $"Inscrição estadual ('{inscricaoEstadual}') inválida para a uf '{uf.Sigla}'.",
+                paramName: nameof(inscricaoEstadual)));
 
         Validate(inscricaoEstadual);
     }
