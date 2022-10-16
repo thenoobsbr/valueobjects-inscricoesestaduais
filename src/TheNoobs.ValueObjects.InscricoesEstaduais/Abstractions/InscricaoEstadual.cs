@@ -48,7 +48,9 @@ public abstract class InscricaoEstadual : ValueObject
     private void Validate(UnidadeFederativa uf, string inscricaoEstadual)
     {
         Requirement.To().NotBeNull(uf, () => new ArgumentNullException(nameof(uf)));
-        Requirement.To().NotBeEmpty(inscricaoEstadual, () => new ArgumentNullException(nameof(inscricaoEstadual), "A inscrição estadual não pode ser nula ou vazia."));
+        Requirement.To().NotBeEmpty(inscricaoEstadual,
+            () => new ArgumentNullException(nameof(inscricaoEstadual),
+                "A inscrição estadual não pode ser nula ou vazia."));
 
         if (EhIsenta(inscricaoEstadual))
         {
