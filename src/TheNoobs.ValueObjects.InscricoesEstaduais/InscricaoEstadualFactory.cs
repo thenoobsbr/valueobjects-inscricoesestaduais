@@ -11,7 +11,7 @@ public static class InscricaoEstadualFactory
     private static readonly IDictionary<UnidadeFederativa, Func<string, InscricaoEstadual>> _factoryPool
         = new Dictionary<UnidadeFederativa, Func<string, InscricaoEstadual>>(QUANTIDADE_VALIDADORES)
         {
-            {Ufs.Acre, inscricaoEstadual => new InscricaoEstadualAcre(inscricaoEstadual)}
+            { Ufs.Acre, inscricaoEstadual => new InscricaoEstadualAcre(inscricaoEstadual) }
         };
 
     public static InscricaoEstadual Create(UnidadeFederativa uf, string inscricaoEstadual)
